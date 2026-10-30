@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: icmr-hitek-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: ICMR_PARALLEL
+        value: "1"
+      - key: ICMR_THREADS_PER_CONN
+        value: "1"
+      - key: GRADIO_ANALYTICS_ENABLED
+        value: "False"
